@@ -1,0 +1,27 @@
+#contact {
+ 	width: 80%;
+ 	border: 10px solid green;
+ 	padding: 50px;
+ 	margin: auto;
+}
+
+#datepicker {
+	width: 80%;
+ 	border: 10px solid green;
+ 	padding: 50px;
+ 	margin: auto;
+	overflow: hidden;
+}
+
+#from-dpicker {
+	display: inline-block;
+}
+
+#to-dpicker {
+	display: inline-block;
+	float: right;
+}
+
+#buttons {
+	text-align: center;
+}

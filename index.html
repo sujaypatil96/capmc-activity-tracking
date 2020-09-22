@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CAPMC Activity Tracking</title>
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-lite/1.1.0/material.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/dataTables.material.min.css">
+	<link rel = "stylesheet" type="text/css" href = "https://code.jquery.com/ui/1.10.4/themes/ui-lightness/jquery-ui.css">
+	<link rel = "stylesheet" type="text/css" href = "css/main.css">
+
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<script src = "https://code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+	<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+	<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap.min.js"></script>
+</head>
+<body>
+	<div id="datepicker">
+		<div id="from-dpicker">From Date: <input type="text" id="from-datepicker"></div>
+		<div id="to-dpicker">To Date: <input type="text" id="to-datepicker"></div>
+		<div id="buttons">
+			<input type="button" value="submit" id="submit" />
+			<input type="button" value="reload" id="reload" />
+		</div>
+	</div>
+	<div id="contact">
+		<table id="recruitment_table"></table>
+	</div>
+</body>
+
+<script type="text/javascript">
+	window.alert = function() {};
+	 
+	$(document).ready(function() {
+		$("#from-datepicker").datepicker({dateFormat: 'yy-mm-dd'});
+		$("#to-datepicker").datepicker({dateFormat: 'yy-mm-dd'});
+	});
+
+	$("input#submit").on("click", function() {
+		$("#recruitment_table").DataTable({
+			"processing": true,
+			"ajax": {
+				"url": "ajax.php",
+				"type": "get",
+				"data": function(d) {
+					d.from_date = $("#from-datepicker").val();
+					d.to_date = $("#to-datepicker").val();
+				}
+			},
+			"columns": [
+				{ "data": "crc", "title": "CRC" },
+				{ "data": "attempts_count", "title": "Total Attempts" },
+				{ "data": "contact_outcomes", "title": "Total Contact Calls" },
+				{ "data": "vm_outcomes", "title": "Total VM Left" },
+				{ "data": "consent_outcomes", "title": "Self Completion of Consent Forms" },
+			]
+		});
+	});
+
+	$("input#reload").on("click", function() {
+		var table = $('#recruitment_table').DataTable();
+		table.ajax.reload();
+	});
+</script>
+</html>
