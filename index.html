@@ -14,6 +14,7 @@
 	<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap.min.js"></script>
 </head>
 <body>
+	<h3>Recruitment Tracking Tool</h3>
 	<div id="datepicker">
 		<div id="from-dpicker">From Date: <input type="text" id="from-datepicker"></div>
 		<div id="to-dpicker">To Date: <input type="text" id="to-datepicker"></div>
@@ -37,6 +38,7 @@
 
 	$("input#submit").on("click", function() {
 		$("#recruitment_table").DataTable({
+			"autoWidth": false,
 			"processing": true,
 			"ajax": {
 				"url": "ajax.php",
@@ -47,11 +49,13 @@
 				}
 			},
 			"columns": [
-				{ "data": "crc", "title": "CRC" },
-				{ "data": "attempts_count", "title": "Total Attempts" },
-				{ "data": "contact_outcomes", "title": "Total Contact Calls" },
-				{ "data": "vm_outcomes", "title": "Total VM Left" },
-				{ "data": "consent_outcomes", "title": "Self Completion of Consent Forms" },
+				{ "data": "crc", "title": "CRC", "width": "10%" },
+				{ "data": "attempts_count", "title": "Total # of Attempts", "width": "15%" },
+				{ "data": "contact_outcomes", "title": "Total # of Calls that Resulted in Contact", "width": "15%" },
+				{ "data": "vm_outcomes", "title": "Total # of VM Left", "width": "15%" },
+				{ "data": "consent_outcomes", "title": "# of Participants that Verbally Committed to Enrolling", "width": "15%" },
+				{ "data": "callreg_outcomes", "title": "# of Participants that Registered During the Call", "width": "15%" },
+				{ "data": "tot_recruitment_time", "title": "Total Time (in mins) Spent on Recruitment", "width": "15%" },
 			]
 		});
 	});
